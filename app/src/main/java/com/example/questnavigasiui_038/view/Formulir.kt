@@ -9,6 +9,7 @@ import androidx.compose.material3.DividerDefaults.Thickness
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,42 +21,63 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.questnavigasiui_038.R
 
-@OptIn(markerClass = ExperimentalMaterial3Api::class)
+@OptIn( ExperimentalMaterial3Api::class)
 @Composable
 fun FormIsian(
     JenisK:List<String> = listOf("Laki-laki","Perempuan"),
     OnSubmitBtnClick : () -> Unit
-){
-    Scaffold (modifier = Modifier,
+) {
+    Scaffold(
+        modifier = Modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.home), color = Color.White)},
+                title = { Text(text = stringResource(id = R.string.home), color = Color.White) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = colorResource(id = R.color.teal_700))
-            )}
+                    containerColor = colorResource(id = R.color.teal_700)
+                )
+            )
+        }
 
-    ){ isiRuang ->
-        Column(modifier = Modifier.padding(paddingValues = isiRuang),
+    ) { isiRuang ->
+        Column(
+            modifier = Modifier.padding(paddingValues = isiRuang),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             OutlinedTextField(
                 value = "",
                 singleLine = true,
                 modifier = Modifier
                     .padding(top = 20.dp)
                     .width(width = 250.dp),
-                label = {Text(text = "Nama Lengkap")},
+                label = { Text(text = "Nama Lengkap") },
                 onValueChange = {},
             )
-            HorizontalDivider(modifier = Modifier
-                .padding(all = 20.dp)
-                .width(width = 250.dp), thickness = Thickness, color = Color.Red)
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(all = 20.dp)
+                    .width(width = 250.dp), thickness = Thickness, color = Color.Red
+            )
             Row {
-                JenisK.forEach {
-                        item->
-                    Row(verticalAlignment = Alignment.CenterHorizontally)
+                JenisK.forEach { item ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = false,
+                            onClick = { item }
+                        )
+                        Text(text = item)
+                    }
                 }
             }
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(all = 20.dp)
+                    .width(width = 250.dp),
+                thickness = 1.dp,
+                color = Color.Red
+            )
         }
     }
+}
